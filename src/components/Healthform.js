@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useTranslation } from 'react-i18next';
+import logo from '../assets/img/wazaratypeshmarga.png'; 
+
 
   const Healthform = () => {
   const [gender, setGender] = useState('');
@@ -42,6 +44,13 @@ import { useTranslation } from 'react-i18next';
   return (
     <div className="bg-gradient-to-r from-emerald-400 to-cyan-400 min-h-screen flex items-center justify-center">
       <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
+      <div className="flex flex-col items-center ">
+      {/* Logo */}
+      <img 
+         src={logo} 
+         alt="Ministry of Peshmerga" 
+         className="mb-4 w-20 h-auto" // Adjust width as needed
+      /></div>
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
           <div className="rounded-t bg-white mb-0 px-6 py-6">
             <div className="text-center flex justify-between">

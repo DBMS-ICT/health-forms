@@ -912,4 +912,3 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
 };
 
 export default Hawalgryform;
-
