@@ -3,15 +3,25 @@ import React, { useEffect, useState } from 'react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useTranslation } from 'react-i18next';
-import logo from '../assets/img/wazaratypeshmarga.png'; 
+import Header from './Header';
+import Footer from './Footer';
 
 
-  const Healthform = () => {
+
+export default function Healthform ()  {
   const [gender, setGender] = useState('');
-  
-
   const [yesno,setyesno]=useState('');
   const[yesnohear,setyesnohear]=useState('');
+  const[fullname,setfullname]=useState('');
+  const[bloodgroup,setbloodgroup]=useState('');
+  const[weight,setweight]=useState('');
+  const[height,setheight]=useState('');
+  const[illnesses,setillnesses]=useState('');
+  const[sensitive,setsensitive]=useState('');
+  const[sick,setsick]=useState('');
+  const[sensitivity,setsensitivity]=useState('');
+  const [error, setError] = useState('');
+  
 
   
   const handleChange = (e) => {
@@ -32,25 +42,88 @@ import logo from '../assets/img/wazaratypeshmarga.png';
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
-
+  const validateFullname = (value) => {
+    const regex = /^[A-Za-z\s]*$/; // Regex to allow only letters and spaces
+    return regex.test(value);
+  };
+  const handleFullnameChange = (e) => {
+    const value = e.target.value;
+    if (validateFullname(value) || value === '') {
+      setfullname(value);
+      setError('');
+    } else {
+      setError('Only letters and spaces are allowed in the fullname.');
+    }
+  };
   useEffect(() => {
     document.title = t('title'); 
   }, [i18n.language, t]);
  
    // Determine text alignment based on the current language
    const textAlign = i18n.language === 'ar' || i18n.language === 'ku' ? 'right' : 'left';
-  
+  const submit=(e)=>
+  {
+    e.preventDefault();
+    
+
+    // Define the map object with appropriate properties
+    const map = {
+        fullname,
+       bloodgroup,
+        weight,
+       height,
+        gender,
+        yesno,
+        yesnohear,
+        sick,
+        illnesses,
+        sensitive,
+        sensitivity,
+    };
+
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(map),
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        return response.json();
+    })
+    .then((body) => {
+        console.log(body);
+        setfullname("");
+        setbloodgroup("");
+        setweight("");
+        setheight("");
+        setGender("");
+        setyesno("");
+        setyesnohear("");
+        setsick("");
+        setillnesses("");
+       setsensitive("");
+        setsensitivity("");
+        
+        console.log("Your post has been submitted successfully.");
+    })
+    .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        console.log("There was an error submitting your post."); // Notify user of error
+    });
+};
 
   return (
+ <>
+  <div className="bg-gradient-to-r from-emerald-400 to-cyan-400 ">
+  
+<Header />
+</div>
     <div className="bg-gradient-to-r from-emerald-400 to-cyan-400 min-h-screen flex items-center justify-center">
+   
       <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
-      <div className="flex flex-col items-center ">
-      {/* Logo */}
-      <img 
-         src={logo} 
-         alt="Ministry of Peshmerga" 
-         className="mb-4 w-20 h-auto" // Adjust width as needed
-      /></div>
+
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
           <div className="rounded-t bg-white mb-0 px-6 py-6">
             <div className="text-center flex justify-between">
@@ -70,18 +143,25 @@ import logo from '../assets/img/wazaratypeshmarga.png';
             </div>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <form>
+            <form onSubmit={submit}>
               <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"style={{ textAlign }}>
               {t('User Information')}
               </h6>
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-6/12 px-4">
                   <div className="relative w-full mb-3">
-                    <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 ${textAlignment}" htmlFor="username"style={{ textAlign }}>
+                    <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 " htmlFor="username"style={{ textAlign }}>
                     {t('FullName')}
                    
                     </label>
-                    <input type="text" id="fullname" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                    <input 
+                    type="text"
+                     id="fullname"
+                     value={fullname}
+                     onChange={handleFullnameChange}
+                     
+                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                 {error && <p style={{ color: 'red' }}>{error}</p>}
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -133,7 +213,15 @@ import logo from '../assets/img/wazaratypeshmarga.png';
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" style={{ textAlign }}>
                     {t('Blood Group')}
                     </label>
-                    <input type="text" id="bloodgroup" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                    <input
+                     type="text"
+                      id="bloodgroup" 
+                      value={bloodgroup}
+                      onChange={(e)=>{
+                        setbloodgroup(e.target.value)
+                       }
+                      }
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
                 
@@ -145,7 +233,15 @@ import logo from '../assets/img/wazaratypeshmarga.png';
                     {t('Weight')}
                    
                     </label>
-                    <input type="text" id="weight" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                    <input 
+                    type="text" 
+                    id="weight" 
+                    value={weight}
+                    onChange={(e)=>{
+                      setweight(e.target.value)
+                     }
+                    }
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -153,7 +249,14 @@ import logo from '../assets/img/wazaratypeshmarga.png';
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" style={{ textAlign }}>
                     {t('Height')}
                     </label>
-                    <input id="height"  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                    <input 
+                    id="height" 
+                    value={height}
+                    onChange={(e)=>{
+                      setheight(e.target.value)
+                     }
+                    }
+                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
                 </div>
@@ -167,7 +270,11 @@ import logo from '../assets/img/wazaratypeshmarga.png';
         {t('Identify any illnesses youve had or are currently?')}
       </label>
 
-      <Menu as="div" className="relative inline-block text-center w-full">
+      <Menu 
+      as="div" 
+      id="sick"
+      
+      className="relative inline-block text-center w-full">
         <div>
           <MenuButton className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" >
           {t('options')}
@@ -182,7 +289,7 @@ import logo from '../assets/img/wazaratypeshmarga.png';
         >
           <div className="py-1">
             {["The Disease of the Heart", "Blood Pressure", "Diabetes", "Bones and Joints", "Kidney Disease", "Liver Disease", "Mental Illness"].map((item, index) => (
-              <MenuItem key={index}>
+              <MenuItem key={index} onSelect={() => setsick(item)}>
                 <p
                 
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
@@ -206,6 +313,11 @@ import logo from '../assets/img/wazaratypeshmarga.png';
       </label>
       <input
         type="text"
+        value={illnesses}
+         onChange={(e)=>{
+           setillnesses(e.target.value)
+          }
+         }
        
         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
       />
@@ -224,7 +336,13 @@ import logo from '../assets/img/wazaratypeshmarga.png';
       {t('Do you have a sensitivity to it?')}
       </label>
 
-      <Menu as="div" className="relative inline-block text-center w-full">
+      <Menu 
+      id="sensitivity"
+      
+     
+
+      as="div" 
+      className="relative inline-block text-center w-full">
         <div>
           <MenuButton className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" >
           {t('options')}
@@ -239,7 +357,7 @@ import logo from '../assets/img/wazaratypeshmarga.png';
         >
           <div className="py-1">
             {["Medication", "Food", "Something else"].map((item, index) => (
-              <MenuItem key={index}>
+              <MenuItem   key={index} onSelect={() =>setsensitivity(item)}>
                 <p
             
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
@@ -262,6 +380,11 @@ import logo from '../assets/img/wazaratypeshmarga.png';
       </label>
       <input
         type="text"
+        value={sensitive}
+          onChange={(e)=>{
+           setsensitive(e.target.value)
+          }
+         }
         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
       />
     </div>
@@ -364,7 +487,7 @@ import logo from '../assets/img/wazaratypeshmarga.png';
               </div>
 
               <div className="flex justify-start">
-    <button className="bg-green-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+    <button className="bg-green-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit">
     {t('Submit')}
     </button>
 </div>
@@ -372,10 +495,12 @@ import logo from '../assets/img/wazaratypeshmarga.png';
             </form>
           </div>
         </div>
-        
+      
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
-export default Healthform;
+

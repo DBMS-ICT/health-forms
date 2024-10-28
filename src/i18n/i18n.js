@@ -196,7 +196,7 @@ i18n
              "Any surgery or injuries that have occurred": "أي عملية جراحية أو إصابات حدثت",
              "Do you use glasses or lenses?": "هل تستخدم النظارات أو العدسات؟",
              "Do you have any hearing problems?": "هل لديك أي مشاكل في السمع؟",
-             "Submit": "Submit",
+           
              "Male":"ذكر",
              "Female":"أنثى",
              "Yes":"نعم",
