@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { Menu } from '@headlessui/react'; 
+import { ChevronDownIcon } from '@heroicons/react/24/solid'; // Correct import for Heroicons v2
+
 import { useTranslation } from 'react-i18next';
 import Header from './Header';
 import Footer from './Footer';
@@ -22,7 +23,7 @@ export default function Healthform ()  {
   const[sick,setsick]=useState('');
   const[sensitivity,setsensitivity]=useState('');
   const [error, setError] = useState('');
-  const [fullnameError, setFullnameError] = useState('');
+ 
 const [bloodgroupError, setBloodgroupError] = useState('');
 const[dateError,setdateError]=useState('');
 const[genderError,setgenderError]=useState('');
@@ -191,14 +192,14 @@ if (!handleChangeyesnoError.trim()) {
        setsensitive("");
         setsensitivity("");
         setbirthday("");
-        setError('');
-        setBloodgroupError('');
-        setdateError('');
-        setgenderError('');
-        sethandleChangeyesnoError('');
-        sethandleChangeyesnohearError('');
-        setheightError('');
-        setweightError('');
+        setError("");
+        setBloodgroupError("");
+        setdateError("");
+        setgenderError("");
+        sethandleChangeyesnoError("");
+        sethandleChangeyesnohearError("");
+        setheightError("");
+        setweightError("");
         
         console.log("Your post has been submitted successfully.");
     })
@@ -375,37 +376,30 @@ if (!handleChangeyesnoError.trim()) {
         {t('Identify any illnesses youve had or are currently?')}
       </label>
 
-      <Menu 
-      as="div" 
-      id="sick"
       
-      className="relative inline-block text-center w-full">
-        <div>
-          <MenuButton className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" >
-          {t('options')}
-
-            <ChevronDownIcon aria-hidden="true" className="-mr-1 h-5 w-5 text-gray-400" />
-          </MenuButton>
-        </div>
-
-        <MenuItems
-          transition
-          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-        >
-          <div className="py-1">
-            {["The Disease of the Heart", "Blood Pressure", "Diabetes", "Bones and Joints", "Kidney Disease", "Liver Disease", "Mental Illness"].map((item, index) => (
-              <MenuItem key={index} onSelect={() => setsick(item)}>
-                <p
-                
-                  className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                >
-                   {t(item)}
-                </p>
-              </MenuItem>
-            ))}
-          </div>
-        </MenuItems>
-      </Menu>
+        
+            <Menu as="div" className="relative inline-block text-center w-full">
+                <div>
+                    <Menu.Button className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                        {sick || "Select an option"}
+                        <ChevronDownIcon aria-hidden="true" className="-mr-1 h-5 w-5 text-gray-400" />
+                    </Menu.Button>
+                </div>
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                    {["The Disease of the Heart", "Blood Pressure", "Diabetes", "Bones and Joints", "Kidney Disease", "Liver Disease", "Mental Illness"].map((item, index) => (
+                        <Menu.Item key={index}>
+                            {({ active }) => (
+                                <button
+                                    onClick={() => setsick(item)}
+                                    className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100' : 'text-gray-700'}`}
+                                >
+                                    {item}
+                                </button>
+                            )}
+                        </Menu.Item>
+                    ))}
+                </Menu.Items>
+            </Menu>
     </div>
   </div>
 
@@ -441,39 +435,31 @@ if (!handleChangeyesnoError.trim()) {
       {t('Do you have a sensitivity to it?')}
       </label>
 
-      <Menu 
-      id="sensitivity"
-      
-     
+      <Menu id="sensitivity" as="div" className="relative inline-block text-center w-full">
+            <div>
+                <Menu.Button className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                    {sensitivity || 'Select an option'} {/* Show selected option or default text */}
+                    <ChevronDownIcon aria-hidden="true" className="-mr-1 h-5 w-5 text-gray-400" />
+                </Menu.Button>
+            </div>
 
-      as="div" 
-      className="relative inline-block text-center w-full">
-        <div>
-          <MenuButton className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" >
-          {t('options')}
-
-            <ChevronDownIcon aria-hidden="true" className="-mr-1 h-5 w-5 text-gray-400" />
-          </MenuButton>
-        </div>
-
-        <MenuItems
-          transition
-          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-        >
-          <div className="py-1">
-            {["Medication", "Food", "Something else"].map((item, index) => (
-              <MenuItem   key={index} onSelect={() =>setsensitivity(item)}>
-                <p
-            
-                  className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                >
-                  {t(item)}
-                </p>
-              </MenuItem>
-            ))}
-          </div>
-        </MenuItems>
-      </Menu>
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                <div className="py-1">
+                    {["Medication", "Food", "Something else"].map((item, index) => (
+                        <Menu.Item key={index}>
+                            {({ active }) => (
+                                <button
+                                    onClick={() => setsensitivity(item)} // Update state on selection
+                                    className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100' : 'text-gray-700'}`}
+                                >
+                                    {t(item)} {/* Assuming t is a translation function */}
+                                </button>
+                            )}
+                        </Menu.Item>
+                    ))}
+                </div>
+            </Menu.Items>
+        </Menu>
     </div>
   </div>
 
@@ -492,10 +478,11 @@ if (!handleChangeyesnoError.trim()) {
          }
         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
       />
-    </div>
-  </div>
-  </div>
-
+  
+ 
+ </div> 
+ </div>
+ </div>
   <div className="flex flex-wrap">
                 <div className="w-full lg:w-6/12 px-4">
                   <div className="relative w-full mb-3">
