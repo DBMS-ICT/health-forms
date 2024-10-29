@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Menu } from '@headlessui/react'; 
-import { ChevronDownIcon } from '@heroicons/react/24/solid'; // Correct import for Heroicons v2
+import { ChevronDownIcon } from '@heroicons/react/24/solid'; 
 
 import { useTranslation } from 'react-i18next';
 import Header from './Header';
@@ -438,7 +438,7 @@ if (!handleChangeyesnoError.trim()) {
       <Menu id="sensitivity" as="div" className="relative inline-block text-center w-full">
             <div>
                 <Menu.Button className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                    {sensitivity || 'Select an option'} {/* Show selected option or default text */}
+                    {sensitivity || 'Select an option'} 
                     <ChevronDownIcon aria-hidden="true" className="-mr-1 h-5 w-5 text-gray-400" />
                 </Menu.Button>
             </div>
@@ -449,10 +449,10 @@ if (!handleChangeyesnoError.trim()) {
                         <Menu.Item key={index}>
                             {({ active }) => (
                                 <button
-                                    onClick={() => setsensitivity(item)} // Update state on selection
+                                    onClick={() => setsensitivity(item)} 
                                     className={`block px-4 py-2 text-sm ${active ? 'bg-gray-100' : 'text-gray-700'}`}
                                 >
-                                    {t(item)} {/* Assuming t is a translation function */}
+                                    {t(item)} 
                                 </button>
                             )}
                         </Menu.Item>
