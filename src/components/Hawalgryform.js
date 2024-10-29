@@ -1,60 +1,69 @@
 
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie'; // Import Cookies
-
 import { useTranslation } from 'react-i18next';
-import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
+import Header from './Header';
+import Footer from './Footer';
 
 
-  const Hawalgryform  = () => {
+export default function Hawalgryform  ()  {
    
     const [currentStep, setCurrentStep] = useState(1);
-    const [formData, setFormData] = useState({
-      fullname: '',
-      location: '',
-      age: '',
-      certificate: '',
-      partyMember: '',
-      partyName: '',
-      connectionDate: '',
-      supporter: '',
-      traveled: '',
-      citizenship: '',
-      Supportheadquarters:'',
-      namefather:'',
-      fatherlive:'',
-      fatherwork:'',
-      fatherparty:'',
-      namemother:'',
-      motherwork:'',
-      partymother:'',
-      motherlive:'',
-      namebrother:'',
-      brotherlive:'',
-      brotherwork:'',
-      partybrother:'',
-      namesister:'',
-      sisterwork:'',
-      sisterlive:'',
-      partysister:'',
-      fatherbrother:'',
-      fatherbrotherwork:'',
-      fatherbrotherlive:'',
-      partyfatherbrother:'',
-      motherbrother:'',
-      motherbrothework:'',
-      motherbrothelive:'',
-      partymotherbrother:'',
-      mothersister:'',
-      motherwork:'',
-      mothersisterlive:'',
-      partymothersister:'',
-      fathersister:'',
-      fathersisterlive:'',
-      fathersisterwork:'',
-      partyfathersister:'',
+    const[fullname,setfullname]=useState('');
+    const[location,setlocation]=useState('');
+    const[age,setage]=useState('');
+    const[certificate,setcertificate]=useState('');
+    const[partyMember,setpartyMember]=useState('');
+    const[partyName,setpartyName]=useState('');
+    const[connectionDate,setconnectionDate]=useState('');
+    const[supporter,setsupporter]=useState('');
+    const[traveled,settraveled]=useState('');
+    const[citizenship,setcitizenship]=useState('');
+    const[Supportheadquarters,setSupportheadquarters]=useState('');
+    const[namefather,setnamefather]=useState('');
+    const[fatherlive,setfatherlive]=useState('');
+    const[fatherwork,setfatherwork]=useState('');
+    const[ fatherparty,setfatherparty]=useState('');
+    const[ namemother,setnamemother]=useState('');
+    const[motherlive,setmotherlive]=useState('');
+    const[motherwork,setmotherwork]=useState('');
+    const[partymother,setpartymother]=useState('');
+    const[ namebrother,setnamebrother]=useState('');
+    const[brotherlive,setbrotherlive]=useState('');
+    const[brotherwork,setbrotherwork]=useState('');
+    const[partybrother,setpartybrother]=useState('');
+    const[namesister,setnamesister]=useState('');
+    const[sisterlive,setsisterlive]=useState('');
+    const[sisterwork,setsisterwork]=useState('');
+    const[partysister,setpartysister]=useState('');
+    const[fatherbrother,setfatherbrother]=useState('');
+    const[fatherbrotherlive,setfatherbrotherlive]=useState('');
+    const[fatherbrotherwork,setfatherbrotherwork]=useState('');
+    const[partyfatherbrother,setpartyfatherbrother]=useState('');
+    const[motherbrother,setmotherbrother]=useState('');
+    const[motherbrothelive,setmotherbrothelive]=useState('');
+    const[motherbrothework,setmotherbrothework]=useState('');
+    const[partymotherbrother,setpartymotherbrother]=useState('');
+    const[mothersister,setmothersister]=useState('');
+    const[mothersisterlive,setmothersisterlive]=useState('');
+    const[mothersisterwork,setmothersisterwork]=useState('');
+    const[partymothersister,setpartymothersister]=useState('');
+    const[fathersister,setfathersister]=useState('');
+    const[fathersisterlive,setfathersisterlive]=useState('');
+    const[fathersisterwork,setfathersisterwork]=useState('');
+    const[partyfathersister,setpartyfathersister]=useState('');
+    const { t, i18n } = useTranslation();
 
-    });
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
+  useEffect(() => {
+    document.title = t('title'); 
+  }, [i18n.language, t]);
+   // Determine text alignment based on the current language
+   const textAlign = i18n.language === 'ar' || i18n.language === 'ku' ? 'right' : 'left';
+ 
   const [yesno,setyesno]=useState('');
 
   const handleChange = (e) => {
@@ -69,66 +78,150 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
    setyesnosafar(e.target.value);
     
   };
-  useEffect(() => {
-    const savedData = Cookies.get('formData');
-    if (savedData) {
-      setFormData(JSON.parse(savedData));
-    }
-  }, []);
-
-  const handleChangecookie = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => {
-      const newData = { ...prevData, [name]: value };
-      Cookies.set('formData', JSON.stringify(newData)); // Save to cookies
-      return newData;
-    });
-  };
-
   const handleNext = () => {
     // Save the current form data to cookies
-    Cookies.set('formData', JSON.stringify(formData));
+   
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
-  const handleSubmit = () => {
-    // Final submission logic, e.g., sending data to an API
-    console.log('Final Data:', formData);
-    // Clear cookies after submission if needed
-    Cookies.remove('formData');
-    // Reset or redirect
-  };
   
+ 
+const submit=(e)=>{
+  e.preventDefault();
+  const map ={
+    fullname,
+    location,
+    age,
+    certificate,
+    partyMember,
+    partyName,
+    connectionDate,
+    supporter,
+    traveled,
+    citizenship,
+    Supportheadquarters,
+    namefather,
+    fatherlive,
+    fatherwork,
+    fatherparty,
+    namemother,
+    motherwork,
+    partymother,
+    motherlive,
+    namebrother,
+    brotherlive,
+    brotherwork,
+    partybrother,
+    namesister,
+    sisterwork,
+    sisterlive,
+    partysister,
+    fatherbrother,
+    fatherbrotherwork,
+    fatherbrotherlive,
+    partyfatherbrother,
+    motherbrother,
+    motherbrothework,
+    motherbrothelive,
+    partymotherbrother,
+    mothersister,
+    mothersisterwork,
+    mothersisterlive,
+    partymothersister,
+    fathersister,
+    fathersisterlive,
+    fathersisterwork,
+    partyfathersister,
+  
+}
+   
+ 
+  
+ 
+
  
 
   
   
-  const { t, i18n } = useTranslation();
-
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
-
-  useEffect(() => {
-    document.title = t('title'); 
-  }, [i18n.language, t]);
- 
+  
    // Determine text alignment based on the current language
    const textAlign = i18n.language === 'ar' || i18n.language === 'ku' ? 'right' : 'left';
-  
+   fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(map),
+})
+.then((response) => {
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    return response.json();
+})
+.then((body) => {
+    console.log(body);
+    setfullname("");
+    setlocation("");
+    setage("");
+    setcertificate("");
+    setpartyMember("");
+    setpartyName("");
+    setconnectionDate("");
+    setsupporter("");
+    settraveled("");
+    setcitizenship("");
+    setSupportheadquarters("");
+    setnamefather("");
+    setfatherlive("");
+    setfatherwork("");
+    setfatherparty("");
+    setnamemother("");
+    setmotherwork("");
+    setpartymother("");
+    setmotherlive("");
+    setnamebrother("");
+    setbrotherlive("");
+    setbrotherwork("");
+    setpartybrother("");
+    setnamesister("");
+    setsisterwork("");
+    setsisterlive("");
+    setpartysister("");
+    setfatherbrother("");
+    setfatherbrotherwork("");
+    setfatherbrotherlive("");
+    setpartyfatherbrother("");
+    setmotherbrother("");
+    setmotherbrothework("");
+    setmotherbrothelive("");
+    setpartymotherbrother("");
+    setmothersister("");
+    setmothersisterwork("");
+    setmothersisterlive("");
+    setpartymothersister("");
+    setfathersister("");
+    setfathersisterlive("");
+    setfathersisterwork("");
+   setpartyfathersister("");
+    
+    console.log("Your post has been submitted successfully.");
+})
+.catch((error) => {
+    console.error("There was a problem with the fetch operation:", error);
+    console.log("There was an error submitting your post."); // Notify user of error
+});
+};
+
 
   return (
+    <>
+    <div className="bg-gradient-to-r from-emerald-400 to-cyan-400 ">
     
+  <Header />
+  </div>
     <div className="bg-gradient-to-r from-emerald-400 to-cyan-400 min-h-screen flex items-center justify-center">
    
       <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
-      <div className="flex flex-col items-center ">
-      {/* Logo */}
-      <img 
-         src={logo} 
-         alt="Ministry of Peshmerga" 
-         className="mb-4 w-20 h-auto" // Adjust width as needed
-      /></div>
+     
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
           <div className="rounded-t bg-white mb-0 px-6 py-6">
             <div className="text-center flex justify-between">
@@ -149,7 +242,7 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
             </div>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <form>
+            <form onSubmit={submit}>
             {currentStep === 1 && (
                 <>
               <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"style={{ textAlign }}>
@@ -160,8 +253,7 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
                   <div className="relative w-full mb-3">
                     <label
                       name="fullname"
-                      value={formData.fullname}
-                      onChange={handleChangecookie}
+                    
                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2 " htmlFor="username"style={{ textAlign }}>
                     {t('FullName')}
                    
@@ -176,8 +268,7 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
                     </label>
                     <input
                       name="location"
-                      value={formData.location}
-                      onChange={handleChangecookie}
+                    
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -189,8 +280,11 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
                     <input
                      type="text" 
                      name="age"
-                     value={formData.age}
-                     onChange={handleChangecookie} 
+                     value={age}
+                    onChange={(e)=>{
+                      setage(e.target.value)
+                     }
+                    }
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -203,8 +297,7 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
                     <input 
                     type="text" 
                     name="certificate"
-                    value={formData.certificate}
-                    onChange={handleChangecookie}
+                   
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -256,8 +349,7 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
                     <input
                      type="text"
                      name="partyName"
-                     value={formData.partyName}
-                     onChange={handleChangecookie}
+                   
                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -272,8 +364,7 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
                     </label>
                     <input type="text"
                    name="connectionDate"
-                   value={formData.connectionDate}
-                   onChange={handleChangecookie}
+                
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -285,8 +376,7 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
                     <input 
                     type='text'
                    name="supporter"
-                   value={formData.supporter}
-                   onChange={handleChangecookie}
+                 
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -381,8 +471,7 @@ import logo from '../assets/img/wazaratypeshmarga.png'; // Adjust the path
   <input    
     type="file" 
     name="Supportheadquarters"
-    value={formData.Supportheadquarters}
-    onChange={handleChangecookie}
+  
     style={{ textAlign }} // Use the desired text alignment
     className="border-0 px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full text-right" // Full width and text aligned right
   />
@@ -411,8 +500,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="namefather"
-                    value={formData.namefather}
-                    onChange={handleChangecookie}
+                 
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -423,8 +511,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                  name="fatherlive"
-                 value={formData.fatherlive}
-                 onChange={handleChangecookie}
+              
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -439,8 +526,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text"
                     name="fatherwork"
-                    value={formData.fatherwork}
-                    onChange={handleChangecookie}
+                 
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -452,8 +538,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input  
                     type='text'
                     name="fatherparty"
-                    value={formData.fatherparty}
-                    onChange={handleChangecookie}
+                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -468,8 +553,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text"
                     name="namemother"
-                    value={formData.namemother}
-                    onChange={handleChangecookie}
+                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -481,8 +565,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                    type='text'
                    name="motherlive"
-                    value={formData.motherlive}
-                    onChange={handleChangecookie}
+                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -496,8 +579,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input type="text"
                      name="motherwork"
-                     value={formData.motherwork}
-                     onChange={handleChangecookie}
+                 
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -509,8 +591,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input  
                     type='text'
                     name="partymother"
-                    value={formData.partymother}
-                    onChange={handleChangecookie}
+                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -524,8 +605,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input type="text" 
                     name="namebrother"
-                    value={formData.namebrother}
-                    onChange={handleChangecookie}
+                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -536,8 +616,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                    name="brotherwork"
-                   value={formData.brotherwork}
-                   onChange={handleChangecookie}
+                 
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -552,8 +631,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text"
                     name="brotherlive"
-                   value={formData.brotherlive}
-                   onChange={handleChangecookie}
+                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -564,8 +642,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input   
                      name="partybrother"
-                     value={formData.partybrother}
-                     onChange={handleChangecookie}
+                    
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -583,8 +660,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input
                      type="text"
                      name="namesister"
-                     value={formData.namesister}
-                     onChange={handleChangecookie}
+                    
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -595,8 +671,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                    name="sisterwork"
-                   value={formData.sisterwork}
-                   onChange={handleChangecookie} 
+                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -611,8 +686,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text"
                     name="sisterlive"
-                    value={formData.sisterlive}
-                    onChange={handleChangecookie}  
+                 
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -624,8 +698,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input  
                     type='text'
                     name="partysister"
-                    value={formData.partysister}
-                    onChange={handleChangecookie} 
+                 
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -660,8 +733,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="fatherbrother"
-                    value={formData.fatherbrother}
-                    onChange={handleChangecookie}  
+                    
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -672,8 +744,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                     name="fatherbrotherwork"
-                    value={formData.fatherbrotherwork}
-                    onChange={handleChangecookie}    
+                  
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -688,8 +759,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="fatherbrotherlive"
-                    value={formData.fatherbrotherlive}
-                    onChange={handleChangecookie}  
+                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -701,8 +771,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input  
                     type='text'
                     name="partyfatherbrother"
-                    value={formData.partyfatherbrother}
-                    onChange={handleChangecookie}  
+                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -718,8 +787,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input
                      type="text" 
                      name="motherbrother"
-                     value={formData.motherbrother}
-                     onChange={handleChangecookie} 
+                     
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -730,8 +798,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                       name="motherbrotherwork"
-                      value={formData.motherbrothework}
-                      onChange={handleChangecookie} 
+                     
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -743,8 +810,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input
                      type="text"
                      name="motherbrotherlive"
-                     value={formData.motherbrothelive}
-                     onChange={handleChangecookie} 
+                     
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -756,8 +822,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="partymotherbrother"
-                    value={formData.partymotherbrother}
-                    onChange={handleChangecookie}  
+                   
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -769,7 +834,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     {t("Name mother's sister")}
                    
                     </label>
-                    <input type="text" id="mother'ssister" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                    <input type="text" id="motherssister" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -778,9 +843,8 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     {t("mother's sister Work")}
                     </label>
                     <input
-                      name="mothersister"
-                      value={formData.mothersister}
-                      onChange={handleChangecookie}   
+                      name="mothersisterwork"
+                    
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -795,8 +859,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="mothersisterlive"
-                    value={formData.mothersisterlive}
-                    onChange={handleChangecookie} 
+                   
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -807,8 +870,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input  
                       name="partymothersister"
-                      value={formData.partymothersister}
-                      onChange={handleChangecookie} 
+                     
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 
@@ -823,8 +885,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input type="text"
                     name="fathersister"
-                    value={formData.fathersister}
-                    onChange={handleChangecookie} 
+                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -835,8 +896,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                      name="fathersisterwork"
-                     value={formData.fathersisterwork}
-                     onChange={handleChangecookie} 
+                   
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -844,15 +904,14 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                 <div className="flex flex-wrap">
                 <div className="w-full lg:w-6/12 px-4">
                   <div className="relative w-full mb-3">
-                    <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 ${textAlignment}" htmlFor="username"style={{ textAlign }}>
+                    <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 " htmlFor="username"style={{ textAlign }}>
                     {t("Where does the fathers'sister live")}
                    
                     </label>
                     <input
                      type="text" 
                      name="fathersisterlive"
-                     value={formData.fathersisterlive}
-                     onChange={handleChangecookie} 
+                    
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -863,8 +922,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input  
                          name="partyfathersister"
-                         value={formData.partyfathersister}
-                         onChange={handleChangecookie} 
+                      
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 
@@ -893,8 +951,8 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
               {t('Back')}
           </button>
     <button 
-     onClick={handleSubmit}
-    className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button" >
+    
+    className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit" >
     {t('Submit')}
     </button>
    
@@ -908,7 +966,9 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
         
       </div>
     </div>
+    
+    <Footer />
+    </>
   );
 };
 
-export default Hawalgryform;

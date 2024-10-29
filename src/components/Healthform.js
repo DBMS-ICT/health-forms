@@ -55,6 +55,30 @@ export default function Healthform ()  {
       setError('Only letters and spaces are allowed in the fullname.');
     }
   };
+  const validateNumber = (value) => {
+    const regex = /^\d*$/; // Regex to allow only digits (0-9)
+    return regex.test(value);
+};
+
+const handleNumberChange = (e) => {
+    const value = e.target.value;
+    if (validateNumber(value) || value === '') {
+        setheight(value);
+        setweight(value);
+        setError('');
+    } else {
+        setError('Only numbers are allowed.');
+    }
+};
+const handleNumberChangeweight = (e) => {
+  const value = e.target.value;
+  if (validateNumber(value) || value === '') {
+      setweight(value);
+      setError('');
+  } else {
+      setError('Only numbers are allowed.');
+  }
+};
   useEffect(() => {
     document.title = t('title'); 
   }, [i18n.language, t]);
@@ -237,11 +261,9 @@ export default function Healthform ()  {
                     type="text" 
                     id="weight" 
                     value={weight}
-                    onChange={(e)=>{
-                      setweight(e.target.value)
-                     }
-                    }
+                   onChange={handleNumberChangeweight}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                 {error && <p style={{ color: 'red' }}>{error}</p>}
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -252,11 +274,9 @@ export default function Healthform ()  {
                     <input 
                     id="height" 
                     value={height}
-                    onChange={(e)=>{
-                      setheight(e.target.value)
-                     }
-                    }
+                   onChange={handleNumberChange}
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                   {error && <p style={{ color: 'red' }}>{error}</p>}
                   </div>
                 </div>
                 </div>
