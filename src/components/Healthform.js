@@ -97,44 +97,59 @@ const handleNumberChangeweight = (e) => {
   {
     e.preventDefault();
     
-    setFullnameError('');
+    setError('');
     setBloodgroupError('');
-
+    setdateError('');
+    setgenderError('');
+    sethandleChangeyesnoError('');
+    sethandleChangeyesnohearError('');
+    setheightError('');
+    setweightError('');
+    
+    let hasError = false; // Flag to check if there are errors
     // Validate fullname
     if (!fullname.trim()) {
-        setFullnameError('Full name is required.');
+        setError('Full name is required.');
+        hasError = true;
     }
 
     // Validate bloodgroup
     if (!bloodgroup.trim()) {
         setBloodgroupError('Blood group is required.');
+        hasError = true;
     }
     //validate datebirthday
     if (!dateError.trim()) {
      setdateError('Date of Birthday is required.');
+     hasError = true;
   }
   //validate gender
   if (!genderError.trim()) {
    setgenderError('Gender is required.');
+   hasError = true;
 }
 //validate height
 if (!heightError.trim()) {
  setheightError('Height is required.');
+ hasError = true;
 }
 //validate weight
 if (!weighttError.trim()) {
  setweightError('Weight is required.');
+ hasError = true;
 }
 if (!handleChangeyesnoError.trim()) {
   sethandleChangeyesnoError(' required.');
+  hasError = true;
  }
  if (!handleChangeyesnohearError.trim()) {
   sethandleChangeyesnohearError(' required.');
+  hasError = true;
  }
-    // If there are errors, prevent submission
-    if (fullnameError || bloodgroupError || dateError||genderError||heightError||weighttError||handleChangeyesnoError||handleChangeyesnohearError) {
-        return;
-    }
+     // If there are any errors, prevent submission
+     if (hasError) {
+      return;
+  }
     // Define the map object with appropriate properties
     const map = {
         fullname,
@@ -176,6 +191,14 @@ if (!handleChangeyesnoError.trim()) {
        setsensitive("");
         setsensitivity("");
         setbirthday("");
+        setError('');
+        setBloodgroupError('');
+        setdateError('');
+        setgenderError('');
+        sethandleChangeyesnoError('');
+        sethandleChangeyesnohearError('');
+        setheightError('');
+        setweightError('');
         
         console.log("Your post has been submitted successfully.");
     })
@@ -232,7 +255,8 @@ if (!handleChangeyesnoError.trim()) {
                      onChange={handleFullnameChange}
                      
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
-                 {fullnameError && <p style={{ color: 'red' }}>{fullnameError}</p>}
+                 {error && <p style={{ color: 'red' }}>{error}</p>}
+                
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
