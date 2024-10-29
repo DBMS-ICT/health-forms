@@ -9,8 +9,8 @@ import Header from './Header';
 const Home = () => {
   return (
    
-    <div className="flex flex-col justify-between h-screen">
-      <div className="!bg-white p-4 md:bg-white">
+    <div className="bg-slate-100 flex flex-col justify-between h-screen">
+      <div className="!bg-slate-100 p-4 md:bg-slate-100">
         
       <Header />
       </div>

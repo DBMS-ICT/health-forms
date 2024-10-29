@@ -1,4 +1,5 @@
 
+
 import React, { useEffect, useState } from 'react';
 import { Menu } from '@headlessui/react'; 
 import { ChevronDownIcon } from '@heroicons/react/24/solid'; 
@@ -211,11 +212,11 @@ if (!handleChangeyesnoError.trim()) {
 
   return (
  <>
-  <div className="bg-gradient-to-r from-emerald-400 to-cyan-400 ">
+  <div className="bg-slate-100 ">
   
 <Header />
 </div>
-    <div className="bg-gradient-to-r from-emerald-400 to-cyan-400 min-h-screen flex items-center justify-center">
+    <div className="bg-slate-100 min-h-screen flex items-center justify-center">
    
       <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
 
@@ -599,5 +600,3 @@ if (!handleChangeyesnoError.trim()) {
     </>
   );
 };
-
-
