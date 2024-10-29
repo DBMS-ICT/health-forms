@@ -10,7 +10,10 @@ const Home = () => {
   return (
    
     <div className="flex flex-col justify-between h-screen">
+      <div className="!bg-white p-4 md:bg-white">
+        
       <Header />
+      </div>
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold">Ministry Of Peshmerga</h1>
       </header>

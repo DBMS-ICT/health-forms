@@ -16,11 +16,20 @@ export default function Healthform ()  {
   const[bloodgroup,setbloodgroup]=useState('');
   const[weight,setweight]=useState('');
   const[height,setheight]=useState('');
+  const[birthday,setbirthday]=useState('');
   const[illnesses,setillnesses]=useState('');
   const[sensitive,setsensitive]=useState('');
   const[sick,setsick]=useState('');
   const[sensitivity,setsensitivity]=useState('');
   const [error, setError] = useState('');
+  const [fullnameError, setFullnameError] = useState('');
+const [bloodgroupError, setBloodgroupError] = useState('');
+const[dateError,setdateError]=useState('');
+const[genderError,setgenderError]=useState('');
+const[heightError,setheightError]=useState('');
+const[weighttError,setweightError]=useState('');
+const[handleChangeyesnoError,sethandleChangeyesnoError]=useState('');
+const[handleChangeyesnohearError,sethandleChangeyesnohearError]=useState('');
   
 
   
@@ -63,20 +72,19 @@ export default function Healthform ()  {
 const handleNumberChange = (e) => {
     const value = e.target.value;
     if (validateNumber(value) || value === '') {
-        setheight(value);
-        setweight(value);
-        setError('');
+        setheight(value);                         
+       setheightError('');
     } else {
-        setError('Only numbers are allowed.');
+      setheightError('Only numbers are allowed.');
     }
 };
 const handleNumberChangeweight = (e) => {
   const value = e.target.value;
   if (validateNumber(value) || value === '') {
       setweight(value);
-      setError('');
+      setweightError('');
   } else {
-      setError('Only numbers are allowed.');
+      setweightError('Only numbers are allowed.');
   }
 };
   useEffect(() => {
@@ -89,7 +97,44 @@ const handleNumberChangeweight = (e) => {
   {
     e.preventDefault();
     
+    setFullnameError('');
+    setBloodgroupError('');
 
+    // Validate fullname
+    if (!fullname.trim()) {
+        setFullnameError('Full name is required.');
+    }
+
+    // Validate bloodgroup
+    if (!bloodgroup.trim()) {
+        setBloodgroupError('Blood group is required.');
+    }
+    //validate datebirthday
+    if (!dateError.trim()) {
+     setdateError('Date of Birthday is required.');
+  }
+  //validate gender
+  if (!genderError.trim()) {
+   setgenderError('Gender is required.');
+}
+//validate height
+if (!heightError.trim()) {
+ setheightError('Height is required.');
+}
+//validate weight
+if (!weighttError.trim()) {
+ setweightError('Weight is required.');
+}
+if (!handleChangeyesnoError.trim()) {
+  sethandleChangeyesnoError(' required.');
+ }
+ if (!handleChangeyesnohearError.trim()) {
+  sethandleChangeyesnohearError(' required.');
+ }
+    // If there are errors, prevent submission
+    if (fullnameError || bloodgroupError || dateError||genderError||heightError||weighttError||handleChangeyesnoError||handleChangeyesnohearError) {
+        return;
+    }
     // Define the map object with appropriate properties
     const map = {
         fullname,
@@ -103,6 +148,7 @@ const handleNumberChangeweight = (e) => {
         illnesses,
         sensitive,
         sensitivity,
+        birthday,
     };
 
     fetch("https://jsonplaceholder.typicode.com/posts", {
@@ -129,6 +175,7 @@ const handleNumberChangeweight = (e) => {
         setillnesses("");
        setsensitive("");
         setsensitivity("");
+        setbirthday("");
         
         console.log("Your post has been submitted successfully.");
     })
@@ -185,7 +232,7 @@ const handleNumberChangeweight = (e) => {
                      onChange={handleFullnameChange}
                      
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
-                 {error && <p style={{ color: 'red' }}>{error}</p>}
+                 {fullnameError && <p style={{ color: 'red' }}>{fullnameError}</p>}
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -193,7 +240,18 @@ const handleNumberChangeweight = (e) => {
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" style={{ textAlign }}>
                     {t('Date Of Birthday')}
                     </label>
-                    <input id="birthday"  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                    <input 
+                    id="birthday" 
+                    value={birthday}
+                    onChange={
+                      (e)=>
+                      {
+                    setbirthday(e.target.value);
+                      }
+
+                    }
+                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                 {dateError && <p style={{ color: 'red' }}>{dateError}</p>}
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -225,11 +283,13 @@ const handleNumberChangeweight = (e) => {
            
           
             className="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring focus:ring-blue-500"
+
           />
           <span className={`ml-2 text-blueGray-600 ${i18n.language === 'ku' ? 'mr-2 ml-0' : ''}`}>{t('Female')}</span>
         </label>
-       
+      
       </div>
+      {genderError && <p style={{ color: 'red' }}>{genderError}</p>}
     </div>
     </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -246,6 +306,7 @@ const handleNumberChangeweight = (e) => {
                        }
                       }
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                  {bloodgroupError && <p style={{ color: 'red' }}>{bloodgroupError}</p>}
                   </div>
                 </div>
                 
@@ -263,7 +324,7 @@ const handleNumberChangeweight = (e) => {
                     value={weight}
                    onChange={handleNumberChangeweight}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
-                 {error && <p style={{ color: 'red' }}>{error}</p>}
+                 {weighttError && <p style={{ color: 'red' }}>{weighttError}</p>}
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -276,7 +337,7 @@ const handleNumberChangeweight = (e) => {
                     value={height}
                    onChange={handleNumberChange}
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
-                   {error && <p style={{ color: 'red' }}>{error}</p>}
+                   {heightError && <p style={{ color: 'red' }}>{heightError}</p>}
                   </div>
                 </div>
                 </div>
@@ -460,10 +521,12 @@ const handleNumberChangeweight = (e) => {
           
             className="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring focus:ring-blue-500"
           />
+               
           <span className={`ml-2 text-blueGray-600 ${i18n.language === 'ku' || i18n.language === 'ar' ? 'mr-2 ml-0' : ''}`}>{t('No')}</span>
         </label>
-       
+      
       </div>
+      {handleChangeyesnoError && <p style={{ color: 'red' }}>{handleChangeyesnoError}</p>}
     </div>
     </div>
     <div className="w-full lg:w-6/12 px-4">
@@ -481,7 +544,9 @@ const handleNumberChangeweight = (e) => {
             onChange={handleChangeyesnohear}
            
             className="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring focus:ring-blue-500"
+       
           />
+               
           <span className="ml-2 text-blueGray-600">{t('Yes')}</span>
         </label>
         <label className="flex items-center">
@@ -500,6 +565,7 @@ const handleNumberChangeweight = (e) => {
         </label>
        
       </div>
+      {handleChangeyesnohearError && <p style={{ color: 'red' }}>{handleChangeyesnohearError}</p>}
     </div>
 
     </div>
