@@ -20,7 +20,8 @@ const Header = () => {
           />
         </div>
         <nav className="hidden md:flex space-x-4">
-          <Link to="/" className="hover:text-gray-400">Home</Link>
+          <Link to="/home" className="hover:text-gray-400">Home</Link>
+         
           <Link to="/about" className="hover:text-gray-400">About</Link>
           <Link to="/contact" className="hover:text-gray-400">Contact</Link>
         </nav>
