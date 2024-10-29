@@ -258,7 +258,16 @@ const submit=(e)=>{
                     {t('FullName')}
                    
                     </label>
-                    <input type="text" id="fullname" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                    <input type="text"
+                     id="fullname" 
+                     value={fullname}
+                     onChange={(e)=>{
+                      setfullname(e.target.value)
+                     }
+
+                     }
+                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                  
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -268,6 +277,14 @@ const submit=(e)=>{
                     </label>
                     <input
                       name="location"
+                      id='location'
+                      value={location}
+                      onChange={
+                        (e)=>
+                        {
+                          setlocation(e.target.value);
+                        }
+                      }
                     
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -297,7 +314,13 @@ const submit=(e)=>{
                     <input 
                     type="text" 
                     name="certificate"
-                   
+                   value={certificate}
+                   onChange={(e)=>
+                   {
+                    setcertificate(e.target.value);
+                   }
+
+                   }
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -349,6 +372,13 @@ const submit=(e)=>{
                     <input
                      type="text"
                      name="partyName"
+                     value={partyName}
+                     onChange={
+                      (e)=>
+                      {
+                        setpartyName(e.target.value);
+                      }
+                     }
                    
                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -364,7 +394,12 @@ const submit=(e)=>{
                     </label>
                     <input type="text"
                    name="connectionDate"
-                
+                   value={connectionDate}
+
+                   onChange={(e)=>{
+                    setconnectionDate(e.target.value)
+                   }
+                  }
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -376,6 +411,11 @@ const submit=(e)=>{
                     <input 
                     type='text'
                    name="supporter"
+                   value={supporter}
+                   onChange={(e)=>{
+                    setsupporter(e.target.value)
+                   }
+                  }
                  
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -471,6 +511,11 @@ const submit=(e)=>{
   <input    
     type="file" 
     name="Supportheadquarters"
+    value={Supportheadquarters}
+    onChange={(e)=>{
+      setSupportheadquarters(e.target.value)
+     }
+    }
   
     style={{ textAlign }} // Use the desired text alignment
     className="border-0 px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full text-right" // Full width and text aligned right
@@ -500,6 +545,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="namefather"
+                    value={namefather}
+                    onChange={(e)=>{
+                    setnamefather(e.target.value)
+                     }
+                    }
                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -511,7 +561,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                  name="fatherlive"
-              
+              value={fatherlive}
+              onChange={(e)=>{
+                setfatherlive(e.target.value)
+               }
+              }
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -526,6 +580,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text"
                     name="fatherwork"
+                    value={fatherwork}
+                    onChange={(e)=>{
+                    setfatherwork(e.target.value)
+                     }
+                    }
                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -538,6 +597,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input  
                     type='text'
                     name="fatherparty"
+                    value={fatherparty}
+                    onChange={(e)=>{
+                      setfatherparty(e.target.value)
+                     }
+                    }
                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -553,6 +617,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text"
                     name="namemother"
+                    value={namemother}
+                    onChange={(e)=>{
+                    setnamemother(e.target.value)
+                     }
+                    }
                    
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -565,6 +634,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                    type='text'
                    name="motherlive"
+                   value={motherlive}
+                   onChange={(e)=>{
+                  setmotherlive(e.target.value)
+                   }
+                  }
                    
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -579,6 +653,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input type="text"
                      name="motherwork"
+                     value={motherwork}
+                     onChange={(e)=>{
+                    setmotherwork(e.target.value)
+                     }
+                    }
                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -591,6 +670,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input  
                     type='text'
                     name="partymother"
+                    value={partymother}
+                    onChange={(e)=>{
+                    setpartymother(e.target.value)
+                     }
+                    }
                    
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -605,6 +689,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input type="text" 
                     name="namebrother"
+                    value={namebrother}
+                    onChange={(e)=>{
+                    setnamebrother(e.target.value)
+                     }
+                    }
                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -616,6 +705,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                    name="brotherwork"
+                   value={brotherwork}
+                   onChange={(e)=>{
+                  setbrotherwork(e.target.value)
+                   }
+                  }
                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -631,6 +725,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text"
                     name="brotherlive"
+                    value={brotherlive}
+                    onChange={(e)=>{
+                    setbrotherlive(e.target.value)
+                     }
+                    }
                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -642,6 +741,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input   
                      name="partybrother"
+                     value={partybrother}
+                     onChange={(e)=>{
+                    setpartybrother(e.target.value)
+                     }
+                    }
                     
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -660,6 +764,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input
                      type="text"
                      name="namesister"
+                     value={namesister}
+                     onChange={(e)=>{
+                      setnamesister(e.target.value)
+                     }
+                    }
                     
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -671,6 +780,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                    name="sisterwork"
+                   value={sisterwork}
+                   onChange={(e)=>{
+                    setsisterwork(e.target.value)
+                   }
+                  }
                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -686,6 +800,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text"
                     name="sisterlive"
+                    value={sisterlive}
+                    onChange={(e)=>{
+                    setsisterlive(e.target.value)
+                     }
+                    }
                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -698,6 +817,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input  
                     type='text'
                     name="partysister"
+                    value={partysister}
+                    onChange={(e)=>{
+                    setpartysister(e.target.value)
+                     }
+                    }
                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -733,6 +857,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="fatherbrother"
+                    value={fatherbrother}
+                    onChange={(e)=>{
+                    setfatherbrother(e.target.value)
+                     }
+                    }
                     
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -744,6 +873,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                     name="fatherbrotherwork"
+                    value={fatherbrotherwork}
+                    onChange={(e)=>{
+                      setfatherbrotherwork(e.target.value)
+                     }
+                    }
                   
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -759,6 +893,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="fatherbrotherlive"
+                    value={fatherbrotherlive}
+                    onChange={(e)=>{
+                      setfatherbrotherlive(e.target.value)
+                     }
+                    }
                    
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -771,6 +910,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input  
                     type='text'
                     name="partyfatherbrother"
+                    value={partyfatherbrother}
+                    onChange={(e)=>{
+                     setpartyfatherbrother(e.target.value)
+                     }
+                    }
                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -787,6 +931,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input
                      type="text" 
                      name="motherbrother"
+                     value={motherbrother}
+                     onChange={(e)=>{
+                     setmotherbrother(e.target.value)
+                     }
+                    }
                      
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -798,6 +947,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                       name="motherbrotherwork"
+                      value={motherbrothework}
+                      onChange={(e)=>{
+                      setmotherbrothework(e.target.value)
+                       }
+                      }
                      
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -810,6 +964,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input
                      type="text"
                      name="motherbrotherlive"
+                     value={motherbrothelive}
+                     onChange={(e)=>{
+                    setmotherbrothelive(e.target.value)
+                     }
+                    }
                      
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -822,6 +981,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="partymotherbrother"
+                    value={partymotherbrother}
+                    onChange={(e)=>{
+                     setpartymotherbrother(e.target.value)
+                     }
+                    }
                    
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -834,7 +998,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     {t("Name mother's sister")}
                    
                     </label>
-                    <input type="text" id="motherssister" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                    <input 
+                    type="text" 
+                    id="motherssister" 
+                    value={mothersister}
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -844,6 +1012,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input
                       name="mothersisterwork"
+                      value={mothersisterwork}
+                      onChange={(e)=>{
+                       setmothersisterwork(e.target.value)
+                       }
+                      }
                     
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -859,6 +1032,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input 
                     type="text" 
                     name="mothersisterlive"
+                    value={mothersisterlive}
+                    onChange={(e)=>{
+                    setmothersisterlive(e.target.value)
+                     }
+                    }
                    
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -870,6 +1048,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input  
                       name="partymothersister"
+                      value={partymothersister}
+                      onChange={(e)=>{
+                      setmothersister(e.target.value)
+                       }
+                      }
                      
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -885,6 +1068,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input type="text"
                     name="fathersister"
+                    value={fathersister}
+                    onChange={(e)=>{
+                      setfathersister(e.target.value)
+                     }
+                    }
                    
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -896,6 +1084,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                      name="fathersisterwork"
+                     value={fatherbrotherwork}
+                     onChange={(e)=>{
+                   setfatherbrotherwork(e.target.value)
+                     }
+                    }
                    
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -911,6 +1104,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input
                      type="text" 
                      name="fathersisterlive"
+                     value={fathersisterlive}
+                     onChange={(e)=>{
+                      setfathersisterlive(e.target.value)
+                     }
+                    }
                     
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
@@ -922,6 +1120,11 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input  
                          name="partyfathersister"
+                         value={partyfathersister}
+                         onChange={(e)=>{
+                         setfathersister(e.target.value)
+                         }
+                        }
                       
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
