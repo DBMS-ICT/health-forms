@@ -1000,8 +1000,12 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     </label>
                     <input 
                     type="text" 
-                    id="motherssister" 
+                    id="mothersister" 
                     value={mothersister}
+                    onChange={(e)=>{
+                    setmothersister(e.target.value)
+                      }
+                     }
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                   </div>
                 </div>
@@ -1050,7 +1054,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                       name="partymothersister"
                       value={partymothersister}
                       onChange={(e)=>{
-                      setmothersister(e.target.value)
+                      setpartymothersister(e.target.value)
                        }
                       }
                      
@@ -1122,7 +1126,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                          name="partyfathersister"
                          value={partyfathersister}
                          onChange={(e)=>{
-                         setfathersister(e.target.value)
+                         setpartyfathersister(e.target.value)
                          }
                         }
                       
