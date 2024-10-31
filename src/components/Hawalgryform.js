@@ -214,11 +214,11 @@ const submit=(e)=>{
 
   return (
     <>
-    <div className="bg-slate-100">
+    <div className="bg-slate-200">
     
   <Header />
   </div>
-    <div className="bg-slate-100 min-h-screen flex items-center justify-center">
+    <div className="bg-slate-200 min-h-screen flex items-center justify-center">
    
       <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
      
