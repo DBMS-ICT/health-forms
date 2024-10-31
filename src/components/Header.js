@@ -45,7 +45,7 @@ const Header = () => {
         </button>
       </div>
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-slate-100 p-4">
+        <div className="md:hidden bg-slate-200 p-4">
           <nav className="flex flex-col space-y-2 items-center">
             <Link to="/" className="hover:text-gray-400">Home</Link>
             <Link to="/about" className="hover:text-gray-400">About</Link>

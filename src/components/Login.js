@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-slate-100 min-h-screen flex items-center justify-center">
+    <div className="bg-slate-200 min-h-screen flex items-center justify-center">
       <div className="w-full sm:w-4/12 md:w-3/12 lg:w-1/4 px-4 mx-auto mt-6">
         <div className="flex flex-col items-center">
           <img 
