@@ -4,6 +4,8 @@ import Cookies from 'js-cookie'; // Import Cookies
 import { useTranslation } from 'react-i18next';
 import Header from './Header';
 import Footer from './Footer';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 export default function Hawalgryform  ()  {
@@ -15,7 +17,7 @@ export default function Hawalgryform  ()  {
     const[certificate,setcertificate]=useState('');
     const[partyMember,setpartyMember]=useState('');
     const[partyName,setpartyName]=useState('');
-    const[connectionDate,setconnectionDate]=useState('');
+    const[connectionDate,setconnectionDate]=useState(null);
     const[supporter,setsupporter]=useState('');
     const[traveled,settraveled]=useState('');
     const[citizenship,setcitizenship]=useState('');
@@ -52,6 +54,23 @@ export default function Hawalgryform  ()  {
     const[fathersisterlive,setfathersisterlive]=useState('');
     const[fathersisterwork,setfathersisterwork]=useState('');
     const[partyfathersister,setpartyfathersister]=useState('');
+    const [error, setError] = useState('');
+    const [locationError, setlocationError] = useState('');
+    const[ageError,setageError]=useState('');
+    const[cirtificateError,setcirtificateError]=useState('');
+    const[partyNameError,setpartyNameError]=useState('');
+    const[dateError,setdateError]=useState('');
+    const[supporterError,setsupporterError]=useState('');
+    const[namefatherError,setnamefatherError]=useState('');
+    const[fatherliveError,setfatherliveError]=useState('');
+    const[fatherworkError,setfatherworkError]=useState('');
+    const[partynamefatherError,setpartnamefatherError]=useState('');
+    const[fullnameError,setfullnameError]=useState('');
+    const[namemotherError,setnamemotherError]=useState('');
+    const[motherliveError,setmotherliveError]=useState('');
+    const[motherworkError,setmotherworkError]=useState('');
+    const[partynamemotherError,setpartnamemotherError]=useState('');
+
     const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
@@ -84,10 +103,129 @@ export default function Hawalgryform  ()  {
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
-  
+  const validateFullname = (value) => {
+    const regex = /^[A-Za-z\s]*$/; // Regex to allow only letters and spaces
+    return regex.test(value);
+  };
+  //validate age
+const validateNumber = (value) => {
+  const regex = /^\d*$/; // Regex to allow only digits (0-9)
+  return regex.test(value);
+};
+
+  const handleFullnameChange = (e) => {
+    const value = e.target.value;
+    if (validateFullname(value) || value === '') {
+      setfullname(value);
+     setfullnameError('');
+    } else {
+      setfullnameError('Only letters and spaces are allowed in the fullname.');
+    }
+  };
+  const handleAgeChange = (e) => {
+    const value = e.target.value;
+    if (validateNumber(value) || value === '') {
+        setage(value);                         
+       setageError('');
+    } else {
+     setageError('Only numbers are allowed.');
+    }
+  };
+
+  //validate name father
+  const validatenamefather = (value) => {
+    const regex = /^[A-Za-z\s]*$/; // Regex to allow only letters and spaces
+    return regex.test(value);
+  };
  
+  const handlenamefatherChange = (e) => {
+    const value = e.target.value;
+    if (validatenamefather(value) || value === '') {
+    setnamefather(value);
+     setnamefatherError('');
+    } else {
+     setnamefatherError('Only letters and spaces are allowed in the Name father.');
+    }
+  };
+  //validate name mother
+  const validatenamemother = (value) => {
+    const regex = /^[A-Za-z\s]*$/; // Regex to allow only letters and spaces
+    return regex.test(value);
+  };
+ 
+  const handlenamemotherChange = (e) => {
+    const value = e.target.value;
+    if (validatenamemother(value) || value === '') {
+   setnamemother(value);
+     setnamemotherError('');
+    } else {
+     setnamemotherError('Only letters and spaces are allowed in the Name Mother.');
+    }
+  };
+ 
+
 const submit=(e)=>{
   e.preventDefault();
+  setError('');
+  setdateError('');
+  setlocationError('');
+  setageError('');
+  setpartyNameError('');
+  setsupporterError('');
+  setnamefatherError('');
+  setfatherliveError('');
+  setfatherworkError('');
+setpartnamefatherError('');
+setnamemotherError('');
+setmotherliveError('');
+setmotherworkError('');
+setpartnamemotherError('');
+
+  
+  let hasError = false; // Flag to check if there are errors
+  //validate location
+  if (!location.trim()) {
+   setlocationError('Blood group is required.');
+    hasError = true;
+}
+//validate certificate
+if (!certificate.trim()) {
+setcirtificateError('certificate is required.');
+   hasError = true;
+}
+//validate party name
+if (!partyName.trim()) {
+  setpartyNameError('Party Name is required.');
+     hasError = true;
+  }
+  //validate date connection
+  if (!dateError.trim()) {
+    setdateError('Date connection is required.');
+    hasError = true;
+ }
+ //validate suport you
+ if (!supporterError.trim()) {
+ setsupporterError('who is suport you is required.');
+  hasError = true;
+}
+//validate father live
+ if (!fatherliveError.trim()) {
+ setfatherliveError('Father live you is required.');
+  hasError = true;
+}
+//validate father work
+ if (!fatherworkError.trim()) {
+ setfatherworkError('Father work is required.');
+  hasError = true;
+}
+//validate father party name
+ if (!partynamefatherError.trim()) {
+ setpartnamefatherError('Party name is required.');
+  hasError = true;
+}
+
+
+
   const map ={
     fullname,
     location,
@@ -95,7 +233,7 @@ const submit=(e)=>{
     certificate,
     partyMember,
     partyName,
-    connectionDate,
+    connectionDate: connectionDate.toISOString().split('T')[0],
     supporter,
     traveled,
     citizenship,
@@ -163,12 +301,14 @@ const submit=(e)=>{
     setlocation("");
     setage("");
     setcertificate("");
+    setyesno("");
     setpartyMember("");
     setpartyName("");
-    setconnectionDate("");
+    setconnectionDate(null);
     setsupporter("");
     settraveled("");
     setcitizenship("");
+    setyesnosafar("");
     setSupportheadquarters("");
     setnamefather("");
     setfatherlive("");
@@ -202,7 +342,21 @@ const submit=(e)=>{
     setfathersisterlive("");
     setfathersisterwork("");
    setpartyfathersister("");
-    
+   setError('');
+   setlocationError('');
+   setageError('');
+   setcirtificateError('');
+   setpartyNameError('');
+   setdateError('');
+   setfullnameError('');
+   setnamefatherError('');
+   setfatherliveError('');
+   setfatherworkError('');
+   setnamemotherError('');
+setmotherliveError('');
+setmotherworkError('');
+setpartnamemotherError('');
+
     console.log("Your post has been submitted successfully.");
 })
 .catch((error) => {
@@ -261,13 +415,10 @@ const submit=(e)=>{
                     <input type="text"
                      id="fullname" 
                      value={fullname}
-                     onChange={(e)=>{
-                      setfullname(e.target.value)
-                     }
-
-                     }
+                     onChange={handleFullnameChange}
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
-                  
+                   {fullnameError && <p style={{ color: 'red' }}>{fullnameError}</p>}
+               
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -287,6 +438,8 @@ const submit=(e)=>{
                       }
                     
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                   {locationError && <p style={{ color: 'red' }}>{locationError}</p>}
+           
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -298,11 +451,10 @@ const submit=(e)=>{
                      type="text" 
                      name="age"
                      value={age}
-                    onChange={(e)=>{
-                      setage(e.target.value)
-                     }
-                    }
+                   onChange={handleAgeChange}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                  {ageError && <p style={{ color: 'red' }}>{ageError}</p>}
+           
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -322,6 +474,8 @@ const submit=(e)=>{
 
                    }
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                  {cirtificateError && <p style={{ color: 'red' }}>{cirtificateError}</p>}
+                
                   </div>
                 </div>
                 
@@ -351,8 +505,9 @@ const submit=(e)=>{
          checked={yesno === 'no'}
          onChange={handleChange}
            id='no'
-            type="radio"
             value="no"
+            type="radio"
+           
         
            
           
@@ -381,6 +536,7 @@ const submit=(e)=>{
                      }
                    
                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                   {partyNameError && <p style={{ color: 'red' }}>{partyNameError}</p>}
                   </div>
                 </div>
                 
@@ -392,16 +548,15 @@ const submit=(e)=>{
                     {t('Date of connection')}
                    
                     </label>
-                    <input type="text"
-                   name="connectionDate"
-                   value={connectionDate}
-
-                   onChange={(e)=>{
-                    setconnectionDate(e.target.value)
-                   }
-                  }
-                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
-                  </div>
+                    <DatePicker
+          selected={connectionDate}
+          onChange={setconnectionDate}
+          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          placeholderText="Select a date"
+          dateFormat="yyyy-MM-dd"
+        />
+        {dateError && <p style={{ color: 'red' }}>{dateError}</p>}
+  </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
                   <div className="relative w-full mb-3">
@@ -503,7 +658,7 @@ const submit=(e)=>{
               <div className="flex flex-col items-end"> {/* Align items to the right */}
   <label 
     className="block uppercase text-blueGray-600 text-xs font-bold mb-2" 
-    htmlFor="fullname" 
+    
     style={{ textAlign }} // Use the desired text alignment
   >
     {t('Support from the headquarters and committee')}
@@ -546,12 +701,10 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     type="text" 
                     name="namefather"
                     value={namefather}
-                    onChange={(e)=>{
-                    setnamefather(e.target.value)
-                     }
-                    }
+                    onChange={handlenamefatherChange}
                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                  {namefatherError && <p style={{ color: 'red' }}>{namefatherError}</p>}
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -567,6 +720,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                }
               }
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                {fatherliveError && <p style={{ color: 'red' }}>{fatherliveError}</p>}
                   </div>
                 </div>
                 </div>
@@ -587,6 +741,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     }
                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                   {fatherworkError && <p style={{ color: 'red' }}>{fatherworkError}</p>}
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -604,6 +759,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     }
                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                   {partynamefatherError && <p style={{ color: 'red' }}>{partynamefatherError}</p>}
                   </div>
                 </div>
                 </div>
@@ -618,12 +774,10 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     type="text"
                     name="namemother"
                     value={namemother}
-                    onChange={(e)=>{
-                    setnamemother(e.target.value)
-                     }
-                    }
+                    onChange={handlenamemotherChange}
                    
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                  {namemotherError && <p style={{ color: 'red' }}>{namemotherError}</p>}
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -641,6 +795,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                   }
                    
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                 {motherliveError && <p style={{ color: 'red' }}>{motherliveError}</p>}
                   </div>
                 </div>
                 </div>
@@ -660,6 +815,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     }
                  
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                  {motherworkError&& <p style={{ color: 'red' }}>{motherworkError}</p>}
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -677,6 +833,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     }
                    
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                  {partynamemotherError&& <p style={{ color: 'red' }}>{partynamemotherError}</p>}
                   </div>
                 </div>
                 </div>
@@ -690,12 +847,13 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                     <input type="text" 
                     name="namebrother"
                     value={namebrother}
-                    onChange={(e)=>{
-                    setnamebrother(e.target.value)
-                     }
-                    }
+                   onChange={(e)=>{
+                  setnamebrother(e.target.value)
+                   }
+                  }
                   
                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+             
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
@@ -1090,7 +1248,7 @@ className=" text-green-500  font-bold uppercase text-xs px-4 py-2 rounded shadow
                      name="fathersisterwork"
                      value={fatherbrotherwork}
                      onChange={(e)=>{
-                   setfatherbrotherwork(e.target.value)
+                   setfathersisterwork(e.target.value)
                      }
                     }
                    

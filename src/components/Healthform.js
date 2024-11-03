@@ -7,6 +7,8 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'react-i18next';
 import Header from './Header';
 import Footer from './Footer';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 
@@ -32,6 +34,7 @@ const[heightError,setheightError]=useState('');
 const[weighttError,setweightError]=useState('');
 const[handleChangeyesnoError,sethandleChangeyesnoError]=useState('');
 const[handleChangeyesnohearError,sethandleChangeyesnohearError]=useState('');
+
   
 
   
@@ -140,6 +143,8 @@ if (!weighttError.trim()) {
  setweightError('Weight is required.');
  hasError = true;
 }
+
+
 if (!handleChangeyesnoError.trim()) {
   sethandleChangeyesnoError(' required.');
   hasError = true;
@@ -165,7 +170,7 @@ if (!handleChangeyesnoError.trim()) {
         illnesses,
         sensitive,
         sensitivity,
-        birthday,
+        birthday: birthday.toISOString().split('T')[0],
     };
 
     fetch("https://jsonplaceholder.typicode.com/posts", {
@@ -192,7 +197,7 @@ if (!handleChangeyesnoError.trim()) {
         setillnesses("");
        setsensitive("");
         setsensitivity("");
-        setbirthday("");
+        setbirthday(null);
         setError("");
         setBloodgroupError("");
         setdateError("");
@@ -266,19 +271,15 @@ if (!handleChangeyesnoError.trim()) {
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" style={{ textAlign }}>
                     {t('Date Of Birthday')}
                     </label>
-                    <input 
-                    id="birthday" 
-                    value={birthday}
-                    onChange={
-                      (e)=>
-                      {
-                    setbirthday(e.target.value);
-                      }
-
-                    }
-                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
-                 {dateError && <p style={{ color: 'red' }}>{dateError}</p>}
-                  </div>
+                    <DatePicker
+          selected={birthday}
+          onChange={setbirthday}
+          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          placeholderText="Select a date"
+          dateFormat="yyyy-MM-dd"
+        />
+        {dateError && <p style={{ color: 'red' }}>{dateError}</p>}
+     </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
